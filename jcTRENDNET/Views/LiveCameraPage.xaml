@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="jcTRENDNET.Views.LiveCameraPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:jcTRENDNET"
+    xmlns:localObjects="using:jcTRENDNET.Objects"
+    xmlns:localVM="using:jcTRENDNET.Viewmodels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <localVM:LiveViewModel />
+    </Page.DataContext>
+    
+    <ListView ItemsSource="{Binding LiveCameras}">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Source="{x:Bind Data}" />
+                    <TextBlock Grid.Row="1" Text="{x:Bind Description}" />
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</Page>
