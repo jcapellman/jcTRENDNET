@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\BootStrapper.cs" />
+    <Compile Include="Common\SettingsManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -114,9 +115,6 @@
     <Compile Include="Views\LiveCameraPage.xaml.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PrivacyPage.xaml.cs">
-      <DependentUpon>PrivacyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -164,10 +162,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PrivacyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

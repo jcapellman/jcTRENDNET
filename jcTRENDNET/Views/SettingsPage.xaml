@@ -8,13 +8,31 @@
     mc:Ignorable="d">
 
     <Hub Header="Settings" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <HubSection Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <HubSection ScrollViewer.VerticalScrollBarVisibility="Auto">
             <DataTemplate>
-                <TextBlock TextWrapping="WrapWholeWords" FontSize="16">
-                
-               </TextBlock>
+               <Grid>
+                   <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                   
+                   <RelativePanel Grid.Row="0">
+                       <TextBlock x:Name="tbAutomatic" Text="automatic refresh interval (seconds)" />
+                       <TextBox RelativePanel.Below="tbAutomatic" Margin="0,10,0,0" Text="10" />
+                   </RelativePanel>
+
+                    <RelativePanel Grid.Row="1" Margin="0,10,0,0">
+                        <TextBlock x:Name="tbTimeout" Text="camera connection timeout (seconds)" />
+                        <TextBox RelativePanel.Below="tbTimeout" Margin="0,10,0,0" Text="10" />
+                    </RelativePanel>
+
+                    <RelativePanel Grid.Row="2" Margin="0,10,0,0">
+                        <TextBlock x:Name="tbCompression" Text="enable compression" />
+                        <ToggleButton RelativePanel.Below="tbCompression" Margin="0,10,0,0" />
+                    </RelativePanel>
+                </Grid>
             </DataTemplate>
         </HubSection>
     </Hub>
-
 </Page>

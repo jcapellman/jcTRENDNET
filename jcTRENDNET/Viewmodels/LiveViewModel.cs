@@ -2,13 +2,9 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Media.Imaging;
 using jcTRENDNET.Objects;
-using System.IO;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage.Streams;
@@ -26,16 +22,14 @@ namespace jcTRENDNET.Viewmodels {
 
             set { _liveCameras = value; OnPropertyChanged(); }
         }
-        
-        public async void LoadData()
-        {
+
+        public async void LoadData() {
             var couldNotConnect = new BitmapImage(new Uri(@"ms-resource://jcTRENDNET/Assets/CouldNotConnect.png", UriKind.RelativeOrAbsolute));
 
             var tmp = new List<LiveCameraResponseItem>();
 
 
-            foreach (var camera in App.Cameras)
-            {
+            foreach (var camera in App.Cameras) {
                 var cameraView = new LiveCameraResponseItem { Description = camera.Description };
 
                 try {
@@ -65,9 +59,7 @@ namespace jcTRENDNET.Viewmodels {
 
                         cameraView.Data = image;
                     }
-                }
-                catch (Exception)
-                {
+                } catch (Exception) {
                     cameraView.Data = couldNotConnect;
                 }
 
@@ -75,7 +67,7 @@ namespace jcTRENDNET.Viewmodels {
             }
 
             LiveCameras = new ObservableCollection<LiveCameraResponseItem>(tmp);
-            
+
         }
 
         #region Property Changed

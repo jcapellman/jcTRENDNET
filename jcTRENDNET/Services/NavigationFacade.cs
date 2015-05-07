@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-namespace jcTRENDNET.Services.NavigationService
-{
-    public class NavigationFacade
-    {
-        public NavigationFacade(Frame frame)
-        {
+namespace jcTRENDNET.Services.NavigationService {
+    public class NavigationFacade {
+        public NavigationFacade(Frame frame) {
             _frame = frame;
             _navigatedEventHandlers = new List<EventHandler<NavigationEventArgs>>();
 
-            // setup animations
             var c = new TransitionCollection { };
             var t = new NavigationThemeTransition { };
-            //var i = new EntranceNavigationTransitionInfo();
-            //t.DefaultNavigationTransitionInfo = i;
+
             c.Add(t);
             _frame.ContentTransitions = c;
         }
@@ -42,8 +35,7 @@ namespace jcTRENDNET.Services.NavigationService
 
         public void GoBack() { _frame.GoBack(); }
 
-        public void Refresh()
-        {
+        public void Refresh() {
             var page = this.CurrentPageType;
             var param = this.CurrentPageParam;
             this._frame.BackStack.Remove(this._frame.BackStack.Last());
@@ -69,22 +61,17 @@ namespace jcTRENDNET.Services.NavigationService
         #endregion
 
         readonly List<EventHandler<NavigationEventArgs>> _navigatedEventHandlers;
-        public event EventHandler<NavigationEventArgs> Navigated
-        {
-            add
-            {
-                if (!_navigatedEventHandlers.Contains(value))
-                {
+        public event EventHandler<NavigationEventArgs> Navigated {
+            add {
+                if (!_navigatedEventHandlers.Contains(value)) {
                     _navigatedEventHandlers.Add(value);
                     if (_navigatedEventHandlers.Count == 1)
                         _frame.Navigated += FacadeNavigatedEventHandler;
                 }
             }
 
-            remove
-            {
-                if (_navigatedEventHandlers.Contains(value))
-                {
+            remove {
+                if (_navigatedEventHandlers.Contains(value)) {
                     _navigatedEventHandlers.Remove(value);
                     if (_navigatedEventHandlers.Count == 0)
                         _frame.Navigated -= FacadeNavigatedEventHandler;
@@ -92,12 +79,9 @@ namespace jcTRENDNET.Services.NavigationService
             }
         }
 
-        void FacadeNavigatedEventHandler(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
-        {
-            foreach (var handler in _navigatedEventHandlers)
-            {
-                var args = new NavigationEventArgs()
-                {
+        void FacadeNavigatedEventHandler(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e) {
+            foreach (var handler in _navigatedEventHandlers) {
+                var args = new NavigationEventArgs() {
                     NavigationMode = e.NavigationMode,
                     Parameter = (e.Parameter == null) ? string.Empty : e.Parameter.ToString()
                 };
@@ -108,21 +92,16 @@ namespace jcTRENDNET.Services.NavigationService
         }
 
         readonly List<EventHandler> _navigatingEventHandlers = new List<EventHandler>();
-        public event EventHandler Navigating
-        {
-            add
-            {
-                if (!_navigatingEventHandlers.Contains(value))
-                {
+        public event EventHandler Navigating {
+            add {
+                if (!_navigatingEventHandlers.Contains(value)) {
                     _navigatingEventHandlers.Add(value);
                     if (_navigatingEventHandlers.Count == 1)
                         _frame.Navigating += FacadeNavigatingCancelEventHandler;
                 }
             }
-            remove
-            {
-                if (_navigatingEventHandlers.Contains(value))
-                {
+            remove {
+                if (_navigatingEventHandlers.Contains(value)) {
                     _navigatingEventHandlers.Remove(value);
                     if (_navigatingEventHandlers.Count == 0)
                         _frame.Navigating -= FacadeNavigatingCancelEventHandler;
@@ -130,14 +109,10 @@ namespace jcTRENDNET.Services.NavigationService
             }
         }
 
-        private void FacadeNavigatingCancelEventHandler(object sender, NavigatingCancelEventArgs e)
-        {
-            foreach (var handler in _navigatingEventHandlers)
-            {
+        private void FacadeNavigatingCancelEventHandler(object sender, NavigatingCancelEventArgs e) {
+            foreach (var handler in _navigatingEventHandlers) {
                 handler(this, new EventArgs());
             }
         }
     }
-
 }
-

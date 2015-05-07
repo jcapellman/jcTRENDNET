@@ -1,31 +1,19 @@
 ﻿using System;
-using System.Linq;
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
 
-namespace jcTRENDNET.Common
-{
-    public abstract class BootStrapper : Application
-    {
-        /// <summary>
-        /// Event to allow views and viewmodels to intercept the Hardware/Shell Back request and 
-        /// implement their own logic, such as closing a dialog. In your event handler, set the
-        /// Handled property of the BackRequestedEventArgs to true if you do not want a Page
-        /// Back navigation to occur.
-        /// </summary>
+namespace jcTRENDNET.Common {
+    public abstract class BootStrapper : Application {
         public event EventHandler<Windows.UI.Core.BackRequestedEventArgs> BackRequested;
 
-        public BootStrapper()
-        {
-            this.Resuming += (s, e) =>
-            {
+        public BootStrapper() {
+            this.Resuming += (s, e) => {
                 OnResuming(s, e);
             };
-            this.Suspending += async (s, e) =>
-            {
+            this.Suspending += async (s, e) => {
                 var deferral = e.SuspendingOperation.GetDeferral();
                 this.NavigationService.Suspending();
                 await OnSuspendingAsync(s, e);
@@ -51,8 +39,7 @@ namespace jcTRENDNET.Common
         protected override async void OnSearchActivated(SearchActivatedEventArgs args) { await InternalActivatedAsync(args); }
         protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args) { await InternalActivatedAsync(args); }
 
-        private async Task InternalActivatedAsync(IActivatedEventArgs e)
-        {
+        private async Task InternalActivatedAsync(IActivatedEventArgs e) {
             await this.OnActivatedAsync(e);
             Window.Current.Activate();
         }
@@ -61,11 +48,9 @@ namespace jcTRENDNET.Common
 
         protected override void OnLaunched(LaunchActivatedEventArgs e) { InternalLaunchAsync(e as ILaunchActivatedEventArgs); }
 
-        private async void InternalLaunchAsync(ILaunchActivatedEventArgs e)
-        {
+        private async void InternalLaunchAsync(ILaunchActivatedEventArgs e) {
             UIElement splashScreen = default(UIElement);
-            if (this.SplashFactory != null)
-            {
+            if (this.SplashFactory != null) {
                 splashScreen = this.SplashFactory(e.SplashScreen);
                 Window.Current.Content = splashScreen;
             }
@@ -77,46 +62,28 @@ namespace jcTRENDNET.Common
             // the user may override to set custom content
             await OnInitializeAsync();
 
-            if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            {
-                try { /* TODO: restore state */ }
-                finally { await this.OnLaunchedAsync(e); }
-            }
-            else
-            {
+            if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) {
+                try { /* TODO: restore state */ } finally { await this.OnLaunchedAsync(e); }
+            } else {
                 await this.OnLaunchedAsync(e);
             }
 
             // if the user didn't already set custom content use rootframe
-            if (Window.Current.Content == splashScreen)
-            {
+            if (Window.Current.Content == splashScreen) {
                 Window.Current.Content = this.RootFrame;
             }
-            if (Window.Current.Content == null)
-            {
+            if (Window.Current.Content == null) {
                 Window.Current.Content = this.RootFrame;
             }
             Window.Current.Activate();
 
-            // Hook up the default Back handler
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
-        /// <summary>
-        /// Default Hardware/Shell Back handler overrides standard Back behavior that navigates to previous app
-        /// in the app stack to instead cause a backward page navigation.
-        /// Views or Viewodels can override this behavior by handling the BackRequested event and setting the
-        /// Handled property of the BackRequestedEventArgs to true.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
+        private void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e) {
             BackRequested?.Invoke(this, e);
-            if (!e.Handled)
-            {
-                if (this.RootFrame.CanGoBack)
-                {
+            if (!e.Handled) {
+                if (this.RootFrame.CanGoBack) {
                     RootFrame.GoBack();
                     e.Handled = true;
                 }
