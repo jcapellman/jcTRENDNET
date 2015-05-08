@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="jcTRENDNET.Views.ManageCameras"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:jcTRENDNET.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Hub Header="Manage Cameras">
+        <Hub.Background>
+            <ImageBrush ImageSource="/Assets/background.jpg" Opacity="0.5" />
+        </Hub.Background>
+        
+        <HubSection ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <DataTemplate>
+                <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+        
+                    <Button Grid.Row="0" HorizontalContentAlignment="Right" Content="Add Camera" />
+        
+                    <ListView Grid.Row="1" HorizontalAlignment="Stretch" ItemsSource="{Binding LiveCameras}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                        
+                                    <TextBlock Grid.Row="0" FontSize="40" Text="{Binding Description}" />
+                                    <TextBlock Grid.Row="1" FontSize="20" Text="{Binding IPAddress}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+        </HubSection>
+    </Hub>
+</Page>

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -12,10 +13,10 @@ namespace jcTRENDNET {
             this.InitializeComponent();
         }
 
-        public static List<StoredCameraResponseItem> Cameras;
+        public static ObservableCollection<StoredCameraResponseItem> Cameras;
 
         public override Task OnInitializeAsync() {
-            Cameras = new List<StoredCameraResponseItem>();
+            Cameras = new ObservableCollection<StoredCameraResponseItem>();
 
             Cameras.Add(new StoredCameraResponseItem {
                 Description = "Test",

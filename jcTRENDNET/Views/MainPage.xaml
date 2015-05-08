@@ -8,6 +8,13 @@
      xmlns:localObjects="using:jcTRENDNET.Objects"
     mc:Ignorable="d">
 
+    <Hub Header="Live Cameras">
+        <Hub.Background>
+            <ImageBrush ImageSource="/Assets/background.jpg" Opacity="0.5" />
+        </Hub.Background>
+        
+        <HubSection>
+            <DataTemplate>
     <GridView ItemsSource="{Binding LiveCameras}">
         <GridView.ItemTemplate>
             <DataTemplate>
@@ -23,4 +30,7 @@
             </DataTemplate>
         </GridView.ItemTemplate>
     </GridView>
+            </DataTemplate>
+        </HubSection>
+    </Hub>
 </Page>

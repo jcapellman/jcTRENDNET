@@ -64,6 +64,15 @@
                         </RadioButton.Tag>
                     </RadioButton>
 
+                    <RadioButton Command="{Binding NavCommand}" Content="Manage Cameras" GroupName="Nav">
+                        <RadioButton.CommandParameter>
+                            <views:NavType Type="views:ManageCameras" />
+                        </RadioButton.CommandParameter>
+                        <RadioButton.Tag>
+                            <TextBlock Text="" />
+                        </RadioButton.Tag>
+                    </RadioButton>
+                    
                     <!-- about -->
                     <RadioButton Command="{Binding NavCommand}" Content="About" GroupName="Nav">
                         <RadioButton.CommandParameter>

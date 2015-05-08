@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Hub Header="About" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Hub Header="About">
+        <Hub.Background>
+            <ImageBrush ImageSource="/Assets/background.jpg" Opacity="0.5" />
+        </Hub.Background>
+        
         <HubSection Width="550" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <DataTemplate>
                 <TextBlock TextWrapping="Wrap" FontSize="16">
