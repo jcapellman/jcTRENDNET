@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace jcTRENDNET.Objects {
@@ -9,5 +10,8 @@ namespace jcTRENDNET.Objects {
 
         [DataMember]
         public BitmapImage Data { get; set; }
+
+        [DataMember]
+        public DateTime TimeStamp { get; set; }
     }
 }

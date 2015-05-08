@@ -63,6 +63,8 @@ namespace jcTRENDNET.Viewmodels {
                     cameraView.Data = couldNotConnect;
                 }
 
+                cameraView.TimeStamp = DateTime.Now;
+
                 tmp.Add(cameraView);
             }
 

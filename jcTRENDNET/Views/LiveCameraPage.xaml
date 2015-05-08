@@ -20,10 +20,12 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{x:Bind Data}" />
-                    <TextBlock Grid.Row="1" Text="{x:Bind Description}" />
+                    <TextBlock Grid.Row="1" FontSize="30" Text="{x:Bind Description}" />
+                    <TextBlock Grid.Row="2" FontSize="20" Text="{x:Bind TimeStamp}" />
                 </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>
