@@ -2,37 +2,34 @@
     x:Class="jcTRENDNET.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:jcTRENDNET.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:localObjects="using:jcTRENDNET.Objects"
+    xmlns:localObjects="using:jcTRENDNET.Objects"
     mc:Ignorable="d">
 
-    <Hub Header="Live Cameras">
-        <Hub.Background>
+    <Pivot>
+        <Pivot.Background>
             <ImageBrush ImageSource="/Assets/background.jpg" Opacity="0.5" />
-        </Hub.Background>
+        </Pivot.Background>
         
-        <HubSection>
-            <DataTemplate>
-                <ListView ItemsSource="{Binding LiveCameras}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="5"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
+        <PivotItem Header="Live Cameras">
+            <GridView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding LiveCameras}">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
-                            <RelativePanel Margin="10,10,10,10">
-                                <Image RelativePanel.AlignTopWithPanel="True" MinHeight="100" x:Name="imgScreenshot" Source="{x:Bind Data}" />
-                                <TextBlock Margin="10,10,0,0" RelativePanel.AlignTopWithPanel="True" x:Name="tbDescription" FontSize="30" Text="{x:Bind Description}" />
-                                <TextBlock Margin="10,0,0,10" RelativePanel.AlignBottomWithPanel="True" FontSize="20" Text="{x:Bind TimeStamp}" />
-                            </RelativePanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </HubSection>
-    </Hub>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
+                        <RelativePanel Margin="10,10,10,10">
+                            <Image RelativePanel.AlignTopWithPanel="True" MinHeight="100" x:Name="imgScreenshot" Source="{x:Bind Data}" />
+                            <TextBlock Margin="10,10,0,0" RelativePanel.AlignTopWithPanel="True" x:Name="tbDescription" FontSize="30" Text="{x:Bind Description}" />
+                            <TextBlock Margin="10,0,0,10" RelativePanel.AlignBottomWithPanel="True" FontSize="20" Text="{x:Bind TimeStamp}" />
+                        </RelativePanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </PivotItem>
+    </Pivot>
 </Page>
