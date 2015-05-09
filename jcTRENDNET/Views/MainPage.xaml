@@ -24,17 +24,11 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
-                            <Grid Margin="10,10,10,10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                
-                                <Image Grid.Row="0" MinHeight="100" x:Name="imgScreenshot" Source="{x:Bind Data}" />
-                                <TextBlock Grid.Row="1" x:Name="tbDescription" FontSize="30" Text="{x:Bind Description}" />
-                                <TextBlock Grid.Row="2" FontSize="20" Text="{x:Bind TimeStamp}" />
-                            </Grid>
+                            <RelativePanel Margin="10,10,10,10">
+                                <Image RelativePanel.AlignTopWithPanel="True" MinHeight="100" x:Name="imgScreenshot" Source="{x:Bind Data}" />
+                                <TextBlock Margin="10,10,0,0" RelativePanel.AlignTopWithPanel="True" x:Name="tbDescription" FontSize="30" Text="{x:Bind Description}" />
+                                <TextBlock Margin="10,0,0,10" RelativePanel.AlignBottomWithPanel="True" FontSize="20" Text="{x:Bind TimeStamp}" />
+                            </RelativePanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
