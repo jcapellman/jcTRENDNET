@@ -6,6 +6,9 @@ namespace jcTRENDNET.Objects {
     [DataContract]
     public class LiveCameraResponseItem {
         [DataMember]
+        public Guid CameraGUID { get; set; }
+
+        [DataMember]
         public string Description { get; set; }
 
         [DataMember]

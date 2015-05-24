@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Media.Imaging;
 using jcTRENDNET.Objects;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Storage.Streams;
 
 namespace jcTRENDNET.Viewmodels {
@@ -23,14 +25,23 @@ namespace jcTRENDNET.Viewmodels {
             set { _liveCameras = value; OnPropertyChanged(); }
         }
 
-        public async void LoadData() {
+        private async void automaticRefresh() {
+            while (true) {
+                var result = await LoadCameras();
+
+                if (result) {
+                    continue;
+                }
+
+                break;
+            }
+        }
+
+        private async Task<bool> LoadCameras() {
             var couldNotConnect = new BitmapImage(new Uri(@"ms-resource://jcTRENDNET/Assets/CouldNotConnect.png", UriKind.RelativeOrAbsolute));
 
-            var tmp = new List<LiveCameraResponseItem>();
-
-
             foreach (var camera in App.Cameras) {
-                var cameraView = new LiveCameraResponseItem { Description = camera.Description };
+                var cameraView = new LiveCameraResponseItem { Description = camera.Description, CameraGUID = camera.ID};
 
                 try {
                     var randomAccessStream = new InMemoryRandomAccessStream();
@@ -51,7 +62,7 @@ namespace jcTRENDNET.Viewmodels {
                         randomAccessStream.Seek(0);
                     }
 
-                    if (randomAccessStream == null) {
+                    if (randomAccessStream.Size == 0) {
                         cameraView.Data = couldNotConnect;
                     } else {
                         var image = new BitmapImage();
@@ -65,11 +76,32 @@ namespace jcTRENDNET.Viewmodels {
 
                 cameraView.TimeStamp = DateTime.Now;
 
-                tmp.Add(cameraView);
+                var added = false;
+                
+                for (var x = 0; x < LiveCameras.Count; x++) {
+                    if (LiveCameras[x].CameraGUID != camera.ID) {
+                        continue;
+                    }
+
+                    LiveCameras.RemoveAt(x);
+                    LiveCameras.Insert(x, cameraView);
+                    added = true;
+                }
+                
+                if (!added) {
+                    LiveCameras.Add(cameraView);
+                }
             }
 
-            LiveCameras = new ObservableCollection<LiveCameraResponseItem>(tmp);
+            return true;
+        }
 
+        public async void LoadData() {
+            LiveCameras = new ObservableCollection<LiveCameraResponseItem>();
+
+            await LoadCameras();
+
+            automaticRefresh();
         }
 
         #region Property Changed
