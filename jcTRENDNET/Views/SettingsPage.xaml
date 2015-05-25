@@ -5,8 +5,13 @@
     xmlns:local="using:jcTRENDNET.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:jcTRENDNET.Viewmodels"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <viewmodels:SettingsModel />
+    </Page.DataContext>
+    
     <Pivot>
         <Pivot.Background>
             <ImageBrush ImageSource="/Assets/background.jpg" Opacity="0.5" />
@@ -20,20 +25,20 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                    
-                <RelativePanel Grid.Row="0">
-                    <TextBlock x:Name="tbAutomatic" Text="automatic refresh interval (seconds)" />
-                    <TextBox RelativePanel.Below="tbAutomatic" Margin="0,10,0,0" Text="10" />
-                </RelativePanel>
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <TextBlock x:Name="tbAutomatic" FontFamily="Segoe" FontSize="20" Text="automatic refresh interval (seconds)" />
+                    <TextBox Margin="0,10,0,0" Text="{Binding Setting_AutomaticRefresh, Mode=TwoWay}" />
+                </StackPanel>
 
-                <RelativePanel Grid.Row="1" Margin="0,10,0,0">
-                    <TextBlock x:Name="tbTimeout" Text="camera connection timeout (seconds)" />
-                    <TextBox RelativePanel.Below="tbTimeout" Margin="0,10,0,0" Text="10" />
-                </RelativePanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10,0,0">
+                    <TextBlock x:Name="tbTimeout" FontFamily="Segoe" FontSize="20" Text="camera connection timeout (seconds)" />
+                    <TextBox Margin="0,10,0,0" Text="{Binding Setting_Timeout, Mode=TwoWay}" />
+                </StackPanel>
 
-                <RelativePanel Grid.Row="2" Margin="0,10,0,0">
-                    <TextBlock x:Name="tbCompression" Text="enable compression" />
-                    <ToggleSwitch RelativePanel.Below="tbCompression" />
-                </RelativePanel>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,10,0,0">
+                    <TextBlock x:Name="tbCompression" FontFamily="Segoe" FontSize="20" Text="enable compression" />
+                    <ToggleSwitch x:Name="tsCompression" IsOn="{Binding Setting_EnableCompression, Mode=TwoWay}" />
+                </StackPanel>
             </Grid>
         </PivotItem>
     </Pivot>

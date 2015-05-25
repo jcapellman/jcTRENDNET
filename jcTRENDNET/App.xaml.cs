@@ -6,11 +6,17 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using jcTRENDNET.Common;
 
 namespace jcTRENDNET {
-    sealed partial class App : Common.BootStrapper {
+    sealed partial class App : Common.BootStrapper
+    {
+        public static SettingsManager SettingManager;
+
         public App() : base() {
             this.InitializeComponent();
+
+            SettingManager = new SettingsManager();
         }
 
         public static ObservableCollection<StoredCameraResponseItem> Cameras;

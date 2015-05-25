@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Media.Imaging;
-using jcTRENDNET.Objects;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+
+using jcTRENDNET.Objects;
 
 namespace jcTRENDNET.Viewmodels {
     public class LiveViewModel : INotifyPropertyChanged {
@@ -25,7 +24,7 @@ namespace jcTRENDNET.Viewmodels {
             set { _liveCameras = value; OnPropertyChanged(); }
         }
 
-        private async void automaticRefresh() {
+        private async Task<bool> automaticRefresh() {
             while (true) {
                 var result = await LoadCameras();
 
@@ -33,7 +32,7 @@ namespace jcTRENDNET.Viewmodels {
                     continue;
                 }
 
-                break;
+                return false;
             }
         }
 
@@ -46,7 +45,7 @@ namespace jcTRENDNET.Viewmodels {
                 try {
                     var randomAccessStream = new InMemoryRandomAccessStream();
 
-                    var urlAddress = String.Format("http://{0}/image/jpeg.cgi", camera.IPAddress);
+                    var urlAddress = $"http://{camera.IPAddress}/image/jpeg.cgi";
 
                     using (var responseStream = await _httpClient.GetStreamAsync(new Uri(urlAddress))) {
                         var buffer = new byte[500];
@@ -101,7 +100,7 @@ namespace jcTRENDNET.Viewmodels {
 
             await LoadCameras();
 
-            automaticRefresh();
+            await automaticRefresh();
         }
 
         #region Property Changed
