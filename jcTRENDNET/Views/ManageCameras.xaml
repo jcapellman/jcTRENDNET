@@ -22,7 +22,7 @@
 
         <PivotItem Header="Manage Cameras" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <Grid>
-                <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding LiveCameras}">
+                <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Cameras}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />

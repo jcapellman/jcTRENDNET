@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using jcTRENDNET.Objects;
 
 namespace jcTRENDNET.LocalDataManager {
     public abstract class BaseManager {
@@ -42,8 +43,14 @@ namespace jcTRENDNET.LocalDataManager {
             return true;
         }
 
+        internal bool RemoveAll() {
+            return true;
+        }
+
+        internal abstract T ConvertGeneric<T>(string strVal);
+        
         internal List<T> GetAll<T>() {
-            return _roamingSettings.Values.Select(item => (T) Convert.ChangeType(item, typeof (T))).ToList();
+            return _roamingSettings.Values.Select(item => ConvertGeneric<T>(item.ToString())).ToList();
         }
     }
 }

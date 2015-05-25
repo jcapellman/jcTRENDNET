@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using jcTRENDNET.Objects;
 
 namespace jcTRENDNET.LocalDataManager {
@@ -8,12 +9,18 @@ namespace jcTRENDNET.LocalDataManager {
             return default(T);
         }
 
+        internal override T ConvertGeneric<T>(string strVal) {
+            return (T)Convert.ChangeType(new StoredCameraResponseItem().FromString(strVal), typeof(T));
+        }
+
         public void AddCamera(StoredCameraResponseItem obj) {
-            AddValue(obj.ID.ToString(), obj);
+            AddValue(obj.ID.ToString(), obj.ToString());
         }
 
         public StoredCameraResponseItem GetCamera(Guid id) {
-            return GetValue<StoredCameraResponseItem>(id.ToString());
+            var cameraStr = GetValue<string>(id.ToString());
+
+            return new StoredCameraResponseItem().FromString(cameraStr);
         }
 
         public bool RemoveCamera(Guid id) {
