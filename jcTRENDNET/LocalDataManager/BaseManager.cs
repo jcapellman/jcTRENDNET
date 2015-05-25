@@ -1,4 +1,8 @@
-﻿namespace jcTRENDNET.LocalDataManager {
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace jcTRENDNET.LocalDataManager {
     public abstract class BaseManager {
         readonly Windows.Storage.ApplicationDataContainer _roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
 
@@ -24,6 +28,22 @@
             object tmp = objVal.ToString().ToLower() != "false";
 
             return (T)tmp;
+        }
+
+        internal bool RemoveValue(string key) {
+            var obj = _roamingSettings.Values[key];
+
+            if (obj == null) {
+                return false;
+            }
+
+            _roamingSettings.Values.Remove(key);
+
+            return true;
+        }
+
+        internal List<T> GetAll<T>() {
+            return _roamingSettings.Values.Select(item => (T) Convert.ChangeType(item, typeof (T))).ToList();
         }
     }
 }

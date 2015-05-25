@@ -39,7 +39,7 @@ namespace jcTRENDNET.Viewmodels {
         private async Task<bool> LoadCameras() {
             var couldNotConnect = new BitmapImage(new Uri(@"ms-resource://jcTRENDNET/Assets/CouldNotConnect.png", UriKind.RelativeOrAbsolute));
 
-            foreach (var camera in App.Cameras) {
+            foreach (var camera in App.Cameras.GetAllCameras()) {
                 var cameraView = new LiveCameraResponseItem { Description = camera.Description, CameraGUID = camera.ID};
 
                 try {

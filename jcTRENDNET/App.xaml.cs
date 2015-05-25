@@ -10,40 +10,37 @@ using jcTRENDNET.Common;
 using jcTRENDNET.LocalDataManager;
 
 namespace jcTRENDNET {
-    sealed partial class App : Common.BootStrapper
-    {
+    sealed partial class App : Common.BootStrapper {
         public static SettingsManager SettingManager;
+        public static CameraManager Cameras;
 
         public App() : base() {
             this.InitializeComponent();
 
             SettingManager = new SettingsManager();
+            Cameras = new CameraManager();
         }
 
-        public static ObservableCollection<StoredCameraResponseItem> Cameras;
-
         public override Task OnInitializeAsync() {
-            Cameras = new ObservableCollection<StoredCameraResponseItem>();
-
-            Cameras.Add(new StoredCameraResponseItem {
+            Cameras.AddCamera(new StoredCameraResponseItem {
                 Description = "Test",
                 ID = Guid.NewGuid(),
                 IPAddress = "192.168.1.120"
             });
 
-            Cameras.Add(new StoredCameraResponseItem {
+            Cameras.AddCamera(new StoredCameraResponseItem {
                 Description = "Test 2",
                 ID = Guid.NewGuid(),
                 IPAddress = "192.168.1.202"
             });
 
-            Cameras.Add(new StoredCameraResponseItem {
+            Cameras.AddCamera(new StoredCameraResponseItem {
                 Description = "Test 3",
                 ID = Guid.NewGuid(),
                 IPAddress = "192.168.1.58"
             });
 
-            Cameras.Add(new StoredCameraResponseItem {
+            Cameras.AddCamera(new StoredCameraResponseItem {
                 Description = "Test 4",
                 ID = Guid.NewGuid(),
                 IPAddress = "192.168.1.166"
