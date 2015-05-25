@@ -95,7 +95,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\BootStrapper.cs" />
-    <Compile Include="Common\SettingsManager.cs" />
+    <Compile Include="LocalDataManager\BaseManager.cs" />
+    <Compile Include="LocalDataManager\CameraManager.cs" />
+    <Compile Include="LocalDataManager\SettingsManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

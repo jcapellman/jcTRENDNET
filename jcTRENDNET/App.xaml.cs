@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using jcTRENDNET.Common;
+using jcTRENDNET.LocalDataManager;
 
 namespace jcTRENDNET {
     sealed partial class App : Common.BootStrapper

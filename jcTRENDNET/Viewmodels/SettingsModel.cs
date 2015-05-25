@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 
 using jcTRENDNET.Common;
+using jcTRENDNET.LocalDataManager;
 
 namespace jcTRENDNET.Viewmodels {
     public class SettingsModel : INotifyPropertyChanged {
