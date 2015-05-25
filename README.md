@@ -5,4 +5,5 @@ This is a complete re-write of the Windows Phone 8.1 app I wrote last summer -> 
 
 Things left before an initial release:
 -Ability to manage cameras
+
 -Ability to share camera stills via email/sms
