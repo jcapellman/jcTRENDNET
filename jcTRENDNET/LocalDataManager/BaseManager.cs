@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using jcTRENDNET.Objects;
+
+using Newtonsoft.Json;
 
 namespace jcTRENDNET.LocalDataManager {
     public abstract class BaseManager {
@@ -9,8 +9,12 @@ namespace jcTRENDNET.LocalDataManager {
 
         internal abstract T getDefault<T>(string key);
 
+        private string serializeGeneric<T>(T obj) {
+            return JsonConvert.SerializeObject(obj);
+        }
+
         internal void AddValue<T>(string key, T objVal) {
-            _roamingSettings.Values[key] = objVal;
+            _roamingSettings.Values[key] = serializeGeneric(objVal);
         }
 
         internal T GetValue<T>(string key) {
@@ -22,13 +26,7 @@ namespace jcTRENDNET.LocalDataManager {
                 AddValue(key, objVal);
             }
 
-            if (typeof(T) != typeof(bool)) {
-                return (T)objVal;
-            }
-
-            object tmp = objVal.ToString().ToLower() != "false";
-
-            return (T)tmp;
+            return JsonConvert.DeserializeObject<T>(objVal.ToString());
         }
 
         internal bool RemoveValue(string key) {
@@ -46,11 +44,9 @@ namespace jcTRENDNET.LocalDataManager {
         internal bool RemoveAll() {
             return true;
         }
-
-        internal abstract T ConvertGeneric<T>(string strVal);
         
         internal List<T> GetAll<T>() {
-            return _roamingSettings.Values.Select(item => ConvertGeneric<T>(item.ToString())).ToList();
+            return _roamingSettings.Values.Select(item => JsonConvert.DeserializeObject<T>(item.ToString())).ToList();
         }
     }
 }

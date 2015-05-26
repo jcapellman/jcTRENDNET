@@ -8,19 +8,13 @@ namespace jcTRENDNET.LocalDataManager {
         internal override T getDefault<T>(string key) {
             return default(T);
         }
-
-        internal override T ConvertGeneric<T>(string strVal) {
-            return (T)Convert.ChangeType(new StoredCameraResponseItem().FromString(strVal), typeof(T));
-        }
-
+        
         public void AddCamera(StoredCameraResponseItem obj) {
             AddValue(obj.ID.ToString(), obj.ToString());
         }
 
         public StoredCameraResponseItem GetCamera(Guid id) {
-            var cameraStr = GetValue<string>(id.ToString());
-
-            return new StoredCameraResponseItem().FromString(cameraStr);
+            return GetValue<StoredCameraResponseItem>(id.ToString());
         }
 
         public bool RemoveCamera(Guid id) {

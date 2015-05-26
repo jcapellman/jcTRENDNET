@@ -11,10 +11,7 @@ namespace jcTRENDNET.LocalDataManager {
         internal override T getDefault<T>(string setting) {
             return getDefault<T>((SETTINGS_ENUM)Enum.Parse(typeof(SETTINGS_ENUM), setting, true));
         }
-
-        internal override T ConvertGeneric<T>(string strVal) {
-            return (T)Convert.ChangeType(strVal, typeof(T));
-        }
+        
 
         private T getDefault<T>(SETTINGS_ENUM setting) {
             switch (setting) {
