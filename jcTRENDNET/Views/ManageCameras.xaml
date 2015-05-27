@@ -11,6 +11,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="abbAdd" Label="Add Camera" Icon="Add" />
+                <AppBarButton x:Name="abbDelete" IsEnabled="False" Label="Delete Camera" Icon="Delete" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -22,7 +23,7 @@
 
         <PivotItem Header="Manage Cameras" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <Grid>
-                <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Cameras}">
+                <ListView HorizontalAlignment="Stretch" x:Name="lvCameras" ItemsSource="{Binding Cameras}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />

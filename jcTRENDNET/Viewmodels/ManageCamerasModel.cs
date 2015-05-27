@@ -17,7 +17,11 @@ namespace jcTRENDNET.Viewmodels {
         }
 
         public bool DeleteCamera(Guid id) {
-            return App.Cameras.RemoveCamera(id);
+            var result = App.Cameras.RemoveCamera(id);
+
+            OnPropertyChanged("Cameras");
+
+            return result;
         }
 
         #region Property Changed
