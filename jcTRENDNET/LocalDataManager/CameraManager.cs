@@ -10,7 +10,7 @@ namespace jcTRENDNET.LocalDataManager {
         }
         
         public void AddCamera(StoredCameraResponseItem obj) {
-            AddValue(obj.ID.ToString(), obj.ToString());
+            AddValue(obj.ID.ToString(), obj);
         }
 
         public StoredCameraResponseItem GetCamera(Guid id) {

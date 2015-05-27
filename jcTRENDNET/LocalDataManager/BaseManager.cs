@@ -46,7 +46,7 @@ namespace jcTRENDNET.LocalDataManager {
         }
         
         internal List<T> GetAll<T>() {
-            return _roamingSettings.Values.Select(item => JsonConvert.DeserializeObject<T>(item.ToString())).ToList();
+            return _roamingSettings.Values.Values.Select(item => item.ToString()).Select(itemStr => (T) JsonConvert.DeserializeObject<T>(itemStr)).ToList();
         }
     }
 }

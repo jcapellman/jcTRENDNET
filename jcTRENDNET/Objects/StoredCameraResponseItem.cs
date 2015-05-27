@@ -21,5 +21,13 @@ namespace jcTRENDNET.Objects {
 
         [DataMember]
         public string Password { get; set; }
+
+        public StoredCameraResponseItem() {
+            Description = String.Empty;
+            IPAddress = String.Empty;
+            IsInternalOnly = true;
+            Username = String.Empty;
+            Password = String.Empty;
+        }
     }
 }
