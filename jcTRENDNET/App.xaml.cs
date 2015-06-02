@@ -15,6 +15,8 @@ namespace jcTRENDNET {
         public static SettingsManager SettingManager;
         public static CameraManager Cameras;
 
+        public static LiveCameraResponseItem SelectedLiveCameraResponseItem;
+
         public App() : base() {
             this.InitializeComponent();
 

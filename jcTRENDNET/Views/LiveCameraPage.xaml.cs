@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using jcTRENDNET.Viewmodels;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+﻿using Windows.UI.Xaml.Controls;
 
-namespace jcTRENDNET.Views
-{
+using jcTRENDNET.Viewmodels;
+using jcTRENDNET.Objects;
+
+namespace jcTRENDNET.Views {
     public partial class LiveCameraPage : Page {
         private LiveViewModel viewModel {
-            get { return (LiveViewModel)DataContext; }
+            get { return (LiveViewModel) DataContext; }
         }
 
-        public LiveCameraPage()
-        {
-            
+        public LiveCameraPage() { 
             DataContext = new LiveViewModel();
 
             viewModel.LoadData();
         }
-        
-      
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            App.SelectedLiveCameraResponseItem = (LiveCameraResponseItem)lvCameras.SelectedItem;
+
+            var nav = (App.Current as App).NavigationService;
+
+            nav.Navigate(typeof(SharePage));
+        }
     }
 }

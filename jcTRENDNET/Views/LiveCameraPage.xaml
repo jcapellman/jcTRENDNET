@@ -13,7 +13,7 @@
         <localVM:LiveViewModel />
     </Page.DataContext>
     
-    <ListView ItemsSource="{Binding LiveCameras}">
+    <ListView x:Name="lvCameras" SelectionChanged="Selector_OnSelectionChanged" ItemsSource="{Binding LiveCameras}">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
                 <Grid>
@@ -23,7 +23,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{x:Bind Data}" />
+                    <Image Grid.Row="0" Source="{x:Bind Data}" x:Name="imgCamera" />
                     <TextBlock Grid.Row="1" FontSize="30" Text="{x:Bind Description}" />
                     <TextBlock Grid.Row="2" FontSize="20" Text="{x:Bind TimeStamp}" />
                 </Grid>
