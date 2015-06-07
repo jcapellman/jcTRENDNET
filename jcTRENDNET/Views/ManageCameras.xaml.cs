@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Xaml.Controls;
+
 using jcTRENDNET.Objects;
 using jcTRENDNET.Viewmodels;
 
@@ -11,8 +12,13 @@ namespace jcTRENDNET.Views {
 
             lvCameras.SelectionChanged += LvCameras_SelectionChanged;
             abbDelete.Tapped += AbbDelete_Tapped;
+            abbAdd.Tapped += AbbAdd_Tapped;
 
             DataContext = new ManageCamerasModel();
+        }
+
+        private void AbbAdd_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) {
+            this.Frame.Navigate(typeof (AddEditCamera));
         }
 
         private void AbbDelete_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) {
