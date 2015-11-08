@@ -29,25 +29,25 @@ namespace jcTRENDNET {
                 Cameras.AddCamera(new StoredCameraResponseItem {
                     Description = "Test",
                     ID = Guid.NewGuid(),
-                    IPAddress = "192.168.1.120"
+                    IPAddress = "192.168.1.56"
                 });
 
                 Cameras.AddCamera(new StoredCameraResponseItem {
                     Description = "Test 2",
                     ID = Guid.NewGuid(),
-                    IPAddress = "192.168.1.202"
+                    IPAddress = "192.168.1.58"
                 });
 
                 Cameras.AddCamera(new StoredCameraResponseItem {
                     Description = "Test 3",
                     ID = Guid.NewGuid(),
-                    IPAddress = "192.168.1.58"
+                    IPAddress = "192.168.1.110"
                 });
 
                 Cameras.AddCamera(new StoredCameraResponseItem {
                     Description = "Test 4",
                     ID = Guid.NewGuid(),
-                    IPAddress = "192.168.1.166"
+                    IPAddress = "192.168.1.202"
                 });
             }
 

@@ -39,8 +39,6 @@ namespace jcTRENDNET.Viewmodels {
         private async Task<bool> LoadCameras() {
             var couldNotConnect = new BitmapImage(new Uri(@"ms-resource://jcTRENDNET/Assets/CouldNotConnect.png", UriKind.RelativeOrAbsolute));
 
-        //    await Windows.Storage.ApplicationData.Current.ClearAsync(Windows.Storage.ApplicationDataLocality.Roaming);
-
             foreach (var camera in App.Cameras.GetAllCameras()) {
                 var cameraView = new LiveCameraResponseItem { Description = camera.Description, CameraGUID = camera.ID};
 
@@ -71,7 +69,9 @@ namespace jcTRENDNET.Viewmodels {
 
                         cameraView.Data = image;
                     }
-                } catch (Exception) {
+                } catch (Exception ex) {
+                    var exception = ex.ToString();
+
                     cameraView.Data = couldNotConnect;
                 }
 
