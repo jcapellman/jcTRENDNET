@@ -13,14 +13,14 @@
         </Pivot.Background>
         
         <PivotItem Header="Live Cameras">
-            <GridView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding LiveCameras}">
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
+            <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding LiveCameras}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>  
 
-                <GridView.ItemTemplate>
+                <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localObjects:LiveCameraResponseItem">
                         <RelativePanel Margin="10,10,10,10">
                             <Image RelativePanel.AlignTopWithPanel="True" MinHeight="100" x:Name="imgScreenshot" Source="{x:Bind Data}" />
@@ -28,8 +28,8 @@
                             <TextBlock Margin="10,0,0,10" RelativePanel.AlignBottomWithPanel="True" FontSize="20" Text="{x:Bind TimeStamp}" />
                         </RelativePanel>
                     </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+                </ListView.ItemTemplate>
+            </ListView>
         </PivotItem>
     </Pivot>
 </Page>
