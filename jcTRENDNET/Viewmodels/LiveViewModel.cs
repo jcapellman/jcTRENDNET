@@ -100,9 +100,11 @@ namespace jcTRENDNET.Viewmodels {
         public async void LoadData() {
             LiveCameras = new ObservableCollection<LiveCameraResponseItem>();
 
-            await LoadCameras();
+            var result = await LoadCameras();
 
-            await automaticRefresh();
+            if (result) {
+                await automaticRefresh();
+            }
         }
 
         #region Property Changed

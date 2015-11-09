@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Newtonsoft.Json;
+using System;
 
 namespace jcTRENDNET.LocalDataManager {
     public abstract class BaseManager {
@@ -14,7 +15,7 @@ namespace jcTRENDNET.LocalDataManager {
         }
 
         internal void AddValue<T>(string key, T objVal) {
-            _roamingSettings.Values[key] = serializeGeneric(objVal);
+            _roamingSettings.Values[typeof(T).FullName + "_" + key] = serializeGeneric(objVal);
         }
 
         internal T GetValue<T>(string key) {
@@ -24,6 +25,10 @@ namespace jcTRENDNET.LocalDataManager {
                 objVal = getDefault<T>(key);
 
                 AddValue(key, objVal);
+            }
+            
+            if (typeof(T) == typeof(bool)) {
+                return (T)Convert.ChangeType(objVal.ToString().ToUpper() == "TRUE", typeof(T));
             }
 
             return JsonConvert.DeserializeObject<T>(objVal.ToString());
@@ -46,7 +51,15 @@ namespace jcTRENDNET.LocalDataManager {
         }
         
         internal List<T> GetAll<T>() {
-            return _roamingSettings.Values.Values.Select(item => item.ToString()).Select(itemStr => (T) JsonConvert.DeserializeObject<T>(itemStr)).ToList();
+            var keys = _roamingSettings.Values.Keys.Where(a => a.StartsWith(typeof(T).FullName + "_")).ToList();
+
+            var data = new List<T>();
+
+            foreach (var key in keys) {
+                data.Add((T)JsonConvert.DeserializeObject<T>(_roamingSettings.Values.FirstOrDefault(a => a.Key == key).Value.ToString()));
+            }
+
+            return data;
         }
     }
 }
