@@ -13,6 +13,6 @@
     </Page.DataContext>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="{Binding Data}" />
+        <Image Source="{Binding Camera.Data}" />
     </Grid>
 </Page>

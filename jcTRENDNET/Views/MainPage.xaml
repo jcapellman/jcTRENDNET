@@ -13,7 +13,7 @@
         </Pivot.Background>
         
         <PivotItem Header="Live Cameras">
-            <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding LiveCameras}">
+            <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="0" SelectionChanged="ListView_SelectionChanged" ItemsSource="{Binding LiveCameras}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
