@@ -18,4 +18,10 @@
             <Image Source="{Binding Camera.Data}" />
         </ScrollViewer>
     </Grid>
+
+    <Page.BottomAppBar>
+        <AppBar>
+            <AppBarButton Content="Save" Icon="Save" x:Name="abbSave" Click="abbSave_Click" />
+        </AppBar>
+    </Page.BottomAppBar>
 </Page>

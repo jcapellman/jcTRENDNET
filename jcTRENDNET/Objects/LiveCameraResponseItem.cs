@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace jcTRENDNET.Objects {
@@ -16,5 +17,8 @@ namespace jcTRENDNET.Objects {
 
         [DataMember]
         public DateTime TimeStamp { get; set; }
+
+        [DataMember]
+        public byte[] RawData { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.Storage.Streams;
 
 using jcTRENDNET.Objects;
+using Windows.Graphics.Imaging;
 
 namespace jcTRENDNET.Viewmodels {
     public class LiveViewModel : INotifyPropertyChanged {
@@ -68,6 +69,14 @@ namespace jcTRENDNET.Viewmodels {
                         await image.SetSourceAsync(randomAccessStream);
 
                         cameraView.Data = image;
+
+                        using (DataReader reader = new DataReader(randomAccessStream.GetInputStreamAt(0))) {
+                            await reader.LoadAsync((uint)randomAccessStream.Size);
+                            byte[] pixeByte = new byte[randomAccessStream.Size];
+
+                            reader.ReadBytes(pixeByte);
+                            cameraView.RawData = pixeByte;
+                        }
                     }
                 } catch (Exception ex) {
                     var exception = ex.ToString();
