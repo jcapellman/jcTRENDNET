@@ -21,7 +21,12 @@
 
     <Page.BottomAppBar>
         <AppBar>
-            <AppBarButton Content="Save" Icon="Save" x:Name="abbSave" Click="abbSave_Click" />
+            <CommandBar IsOpen="True">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Content="Save" Icon="Save" x:Name="abbSave" Click="abbSave_Click" />
+                    <AppBarButton Content="Share" Icon="Send" x:Name="abbShare" Click="abbShare_Click" />
+                </CommandBar.PrimaryCommands>
+            </CommandBar>
         </AppBar>
     </Page.BottomAppBar>
 </Page>

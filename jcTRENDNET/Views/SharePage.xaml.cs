@@ -5,12 +5,8 @@ using jcTRENDNET.Viewmodels;
 using Windows.UI.Xaml.Navigation;
 using jcTRENDNET.Objects;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Media.Imaging;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage.Streams;
-using Windows.Graphics.Imaging;
-using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace jcTRENDNET.Views {
     public sealed partial class SharePage : Page {
@@ -35,7 +31,7 @@ namespace jcTRENDNET.Views {
 
             savePicker.FileTypeChoices.Add("JPEG", new List<string>() { ".jpg" });
 
-            savePicker.SuggestedFileName = viewModel.Camera.Description.Replace(" ","-") + "_" + DateTime.Now.ToString().Replace(" ", "_") + ".jpg";
+            savePicker.SuggestedFileName = viewModel.Camera.Description.Replace(" ", "-") + "_" + DateTime.Now.ToString().Replace(" ", "_") + ".jpg";
 
             var file = await savePicker.PickSaveFileAsync();
 
@@ -47,6 +43,21 @@ namespace jcTRENDNET.Views {
 
             await Windows.Storage.FileIO.WriteBytesAsync(file, viewModel.Camera.RawData);
             await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+        }
+
+        private void abbShare_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
+            DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+            dataTransferManager.DataRequested += DataTransferManager_DataRequested;
+
+            DataTransferManager.ShowShareUI();
+        }
+
+        private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args) {
+            DataRequest request = args.Request;
+
+            RandomAccessStreamReference imageStream = RandomAccessStreamReference.CreateFromUri(viewModel.Camera.Data.UriSource);
+
+            request.Data.SetBitmap(imageStream);
         }
     }
 }
